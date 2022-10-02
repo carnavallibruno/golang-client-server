@@ -20,14 +20,14 @@ func main() {
 		// what to send?
 		reader := bufio.NewReader(os.Stdin)
 		for i := 0; i < 3; i++ {
-			fmt.Print("Nome do aluno ", i+1, ": ")
+			fmt.Print("Nome do aluno ", i + 1, ": ")
 			text, _ := reader.ReadString('\n')
 			
       // send to server
-      fmt.Fprintf(conn, text+"\n")
+      fmt.Fprintf(conn, text)
 			
 			for i := 0; i < 3; i++ {
-				fmt.Println("Nota ", i+1," do aluno: ")
+				fmt.Println("Nota", i + 1,"do aluno: ")
 				text, _ := reader.ReadString('\n')
 				
 			fmt.Fprintf(conn, text)
