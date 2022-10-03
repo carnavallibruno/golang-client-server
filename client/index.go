@@ -8,29 +8,30 @@ import (
 )
 
 func main() {
-
-	// connect to server
-	conn, _ := net.Dial("tcp", ":8000")
-	// reader := bufio.NewReader(os.Stdin)
-
-	// fmt.Print("Nome do Aluno: ")
-	// name, _ := reader.ReadString('\n')
-
+	args := os.Args
+	fmt.Print(args)
+	//retorna erro caso não tenha sido declarada nenhuma porta
+	if len(args) == 1 {
+		fmt.Println("Por favor digite a porta que deseja se comunicar com o servidor")
+		return
+	}
+	// se conecta ao servidor pela porta declarada
+	conn, _ := net.Dial("tcp", args[1])
 	for {
-		// what to send?
+		// mensagem para o servidor
 		reader := bufio.NewReader(os.Stdin)
 		for i := 0; i < 3; i++ {
 			fmt.Print("Nome do aluno ", i+1, ": ")
 			text, _ := reader.ReadString('\n')
-			
-      // send to server
-      fmt.Fprintf(conn, text+"\n")
-			
+
+			// send to server
+			fmt.Fprintf(conn, text+"\n")
+
 			for i := 0; i < 3; i++ {
-				fmt.Println("Nota ", i+1," do aluno: ")
+				fmt.Println("º", i+1, "nota do aluno:")
 				text, _ := reader.ReadString('\n')
-				
-			fmt.Fprintf(conn, text)
+
+				fmt.Fprintf(conn, text)
 			}
 		}
 		// wait for reply
