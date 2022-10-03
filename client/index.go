@@ -25,10 +25,11 @@ func main() {
 			text, _ := reader.ReadString('\n')
 
 			// send to server
-			fmt.Fprintf(conn, text+"\n")
+			fmt.Fprintf(conn, text)
 
 			for i := 0; i < 3; i++ {
-				fmt.Println("º", i+1, "nota do aluno:")
+				fmt.Println("Nota", i+1, "do aluno: ")
+
 				text, _ := reader.ReadString('\n')
 
 				fmt.Fprintf(conn, text)
